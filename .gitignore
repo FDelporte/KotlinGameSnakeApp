@@ -7,4 +7,3 @@
 /.kotlin/errors/*
 /androidApp/build/*
 /desktopApp/build/*
-gradle.properties
