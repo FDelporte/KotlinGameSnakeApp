@@ -4,3 +4,6 @@
 /*.bak
 /local.properties
 /shared/build/*
+/.kotlin/errors/*
+/androidApp/build/*
+/desktopApp/build/*
