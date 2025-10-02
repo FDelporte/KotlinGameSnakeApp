@@ -1,4 +1,4 @@
-package com.snakegame.models
+package be.webtechie.emojisnakeapp.model
 
 sealed class GameState {
     data object NotStarted : GameState()

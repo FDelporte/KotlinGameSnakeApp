@@ -1,4 +1,4 @@
-package com.snakegame
+package be.webtechie.emojisnakeapp
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -16,8 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.snakegame.models.Direction
-import com.snakegame.models.GameState
+import be.webtechie.emojisnakeapp.model.Direction
+import be.webtechie.emojisnakeapp.model.GameState
 import kotlin.math.abs
 
 @Composable

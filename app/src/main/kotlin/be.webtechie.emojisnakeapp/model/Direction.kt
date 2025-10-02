@@ -1,4 +1,4 @@
-package com.snakegame.models
+package be.webtechie.emojisnakeapp.model
 
 enum class Direction(val offset: Position) {
     UP(Position(0, -1)),

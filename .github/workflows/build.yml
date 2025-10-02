@@ -1,21 +1,10 @@
-name: Android Release Build and Deploy
+name: "Android Release Build and Deploy"
 
 on:
   push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
-    inputs:
-      release_track:
-        description: 'Release track (internal, alpha, beta, production)'
-        required: true
-        default: 'internal'
-        type: choice
-        options:
-          - internal
-          - alpha
-          - beta
-          - production
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -100,7 +89,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.snakegame.android
+          packageName: be.webtechie.emojisnakeapp.android
           releaseFiles: app/build/outputs/bundle/release/*.aab
           track: ${{ github.event.inputs.release_track || 'internal' }}
           status: completed

@@ -1,4 +1,4 @@
-package com.snakegame.ui.theme
+package be.webtechie.emojisnakeapp.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

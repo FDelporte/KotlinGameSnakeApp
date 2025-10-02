@@ -21,7 +21,7 @@ android {
     /**
      * The app's namespace. Used primarily to access app resources.
      */
-    namespace = "com.snakegame"
+    namespace = "be.webtechie.emojisnakeapp"
 
     /**
      * compileSdk specifies the Android API level Gradle should use to
@@ -38,7 +38,7 @@ android {
      */
     defaultConfig {
         // Uniquely identifies the package for publishing.
-        applicationId = "com.snakegame"
+        applicationId = "be.webtechie.emojisnakeapp"
 
         // Defines the minimum API level required to run the app.
         minSdk = 21
@@ -129,5 +129,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = "com.snakegame.SnakeGame"
+    mainClass = "be.webtechie.emojisnakeapp.SnakeGame"
 }

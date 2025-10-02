@@ -1,11 +1,11 @@
-package com.snakegame
+package be.webtechie.emojisnakeapp
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.snakegame.models.*
+import be.webtechie.emojisnakeapp.model.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

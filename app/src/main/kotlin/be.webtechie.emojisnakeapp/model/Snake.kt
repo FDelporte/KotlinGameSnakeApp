@@ -1,4 +1,4 @@
-package com.snakegame.models
+package be.webtechie.emojisnakeapp.model
 
 data class Snake(
     val body: List<Position>,
