@@ -59,9 +59,9 @@ fun GameScreen() {
         }
 
         // Game over dialog
-        if (model.model is model.GameOver) {
+        if (model.state is GameViewModel.GameState.GameOver) {
             GameOverDialog(
-                score = (model.model as model.GameOver).score,
+                score = (model.state as GameViewModel.GameState.GameOver).score,
                 onRestart = { model.startGame() }
             )
         }
@@ -124,10 +124,10 @@ fun GameBoard(model: GameViewModel) {
                 )
             }
     ) {
-        val cellSize = size.width / SnakeGamemodel.GRID_SIZE
+        val cellSize = size.width / GameViewModel.GRID_SIZE
 
         // Draw grid
-        for (i in 0..SnakeGamemodel.GRID_SIZE) {
+        for (i in 0..GameViewModel.GRID_SIZE) {
             val offset = i * cellSize
             drawLine(
                 color = Color(0xFF3A3A3A),
@@ -185,8 +185,8 @@ fun GameControls(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        when (model) {
-            is model.NotStarted -> {
+        when (model.state) {
+            is GameViewModel.GameState.NotStarted -> {
                 Button(
                     onClick = onStart,
                     colors = ButtonDefaults.buttonColors(
@@ -196,7 +196,7 @@ fun GameControls(
                     Text("Start Game", fontSize = 18.sp)
                 }
             }
-            is model.Running -> {
+            is GameViewModel.GameState.Running -> {
                 Button(
                     onClick = onPause,
                     colors = ButtonDefaults.buttonColors(
@@ -206,7 +206,7 @@ fun GameControls(
                     Text("Pause", fontSize = 18.sp)
                 }
             }
-            is model.Paused -> {
+            is GameViewModel.GameState.Paused -> {
                 Button(
                     onClick = onResume,
                     colors = ButtonDefaults.buttonColors(
@@ -216,7 +216,7 @@ fun GameControls(
                     Text("Resume", fontSize = 18.sp)
                 }
             }
-            is model.GameOver -> {
+            is GameViewModel.GameState.GameOver -> {
                 // Handled by dialog
             }
         }
