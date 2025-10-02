@@ -88,7 +88,7 @@ jobs:
       - name: Deploy to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: be.webtechie.emojisnakeapp.android
           releaseFiles: androidApp/build/outputs/bundle/release/*.aab
           track: ${{ github.event.inputs.release_track || 'internal' }}
