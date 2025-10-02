@@ -91,6 +91,6 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: be.webtechie.emojisnakeapp.android
           releaseFiles: androidApp/build/outputs/bundle/release/*.aab
-          track: ${{ github.event.inputs.release_track || 'internal' }}
+          track: internal
           status: completed
           inAppUpdatePriority: 2
