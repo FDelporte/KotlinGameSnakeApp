@@ -48,3 +48,7 @@ sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
 sdkmanager --licenses
 ```
+
+## Add to Google Play Store
+
+If this app doesn't exist in Google Play Console yet, you'll still get "Package not found". You must do the first upload manually through the Play Console web interface.

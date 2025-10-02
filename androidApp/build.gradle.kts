@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.snakegame.android"
+    namespace = "be.webtechie.emojisnakeapp.kotlin"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.snakegame.android"
+        applicationId = "be.webtechie.emojisnakeapp.kotlin"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
