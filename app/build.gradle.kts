@@ -28,7 +28,7 @@ android {
      * compile your app. This means your app can use the API features included in
      * this API level and lower.
      */
-    compileSdk = 33
+    compileSdk = 35
 
     /**
      * The defaultConfig block encapsulates default settings and entries for all
