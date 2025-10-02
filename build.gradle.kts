@@ -1,22 +1,16 @@
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.0" apply false
+    kotlin("multiplatform") version "2.1.0" apply false
+    id("com.android.application") version "8.7.3" apply false
+    id("com.android.library") version "8.7.3" apply false
+    id("org.jetbrains.compose") version "1.7.1" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0" apply false
 }
-buildscript {
+
+allprojects {
     repositories {
         google()
         mavenCentral()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.13.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
-//dependencies {
-//    implementation(kotlin("stdlib-jdk8"))
-//}
-repositories {
-    mavenCentral()
-}
-//kotlin {
-//    jvmToolchain(8)
-//}
