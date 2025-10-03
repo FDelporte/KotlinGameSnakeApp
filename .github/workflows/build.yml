@@ -37,7 +37,12 @@ jobs:
           echo "Keystore file: ${{ steps.android_keystore_file.outputs.filePath }}"
           echo "Keystore file exists: $(test -f ${{ steps.android_keystore_file.outputs.filePath }} && echo 'Yes' || echo 'No')"
           echo "Keystore file size: $(stat -c%s ${{ steps.android_keystore_file.outputs.filePath }} 2>/dev/null || echo 'N/A') bytes"
-          keytool -list -keystore ${{ steps.android_keystore_file.outputs.filePath }} -storepass ${{ secrets.KEYSTORE_PASSWORD }} | head -5
+
+          # Check file type
+          file ${{ steps.android_keystore_file.outputs.filePath }}
+
+          # Try to list keystore without password first to see if it prompts
+          keytool -list -keystore ${{ steps.android_keystore_file.outputs.filePath }} -storepass ${{ secrets.KEYSTORE_PASSWORD }} -v 2>&1 | head -10 || true
 
       - name: Build Release APK
         env:

@@ -7,3 +7,7 @@
 /.kotlin/errors/*
 /androidApp/build/*
 /desktopApp/build/*
+/my-keystore.jks
+/keystore.b64
+/test.keystore
+/actual-keystore.jks
