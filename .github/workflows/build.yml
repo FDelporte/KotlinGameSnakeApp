@@ -32,6 +32,12 @@ jobs:
           fileName: 'my.keystore'
           encodedString: ${{ secrets.KEYSTORE_BASE64 }}
 
+      - name: Verify Keystore
+        run: |
+          echo "Keystore file exists: $(test -f ${{ steps.android_keystore_file.outputs.filePath }} && echo 'Yes' || echo 'No')"
+          echo "Keystore file size: $(stat -c%s ${{ steps.android_keystore_file.outputs.filePath }} 2>/dev/null || echo 'N/A') bytes"
+          keytool -list -keystore ${{ steps.android_keystore_file.outputs.filePath }} -storepass ${{ secrets.KEYSTORE_PASSWORD }} | head -5
+
       - name: Build Release APK
         env:
           KEYSTORE_FILE: ${{ steps.android_keystore_file.outputs.filePath }}
