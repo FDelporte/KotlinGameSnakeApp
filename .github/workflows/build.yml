@@ -25,22 +25,33 @@ jobs:
         run: chmod +x gradlew
 
       # Setup the Android keystore, based on a repo secret. See the section 'Setup Android Keystore' below.
-      - name: Setup Android Keystore
-        id: android_keystore_file
-        uses: timheuer/base64-to-file@v1
-        with:
-          fileName: 'my.keystore'
-          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+      #- name: Setup Android Keystore
+      #  id: android_keystore_file
+      #  uses: timheuer/base64-to-file@v1
+      #  with:
+      #    fileName: 'my.keystore'
+      #    encodedString: ${{ secrets.KEYSTORE_BASE64 }}
+
+      #- name: Verify Keystore
+      #  run: |
+      #    echo "Keystore file exists: $(test -f ${{ steps.android_keystore_file.outputs.filePath }} && echo 'Yes' || echo 'No')"
+      #    echo "Keystore file size: $(stat -c%s ${{ steps.android_keystore_file.outputs.filePath }} 2>/dev/null || echo 'N/A') bytes"
+      #    keytool -list -keystore ${{ steps.android_keystore_file.outputs.filePath }} -storepass ${{ secrets.KEYSTORE_PASSWORD }} | head -5
+
+
+      - name: Create Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > ${{ github.workspace }}/my.keystore
 
       - name: Verify Keystore
         run: |
-          echo "Keystore file exists: $(test -f ${{ steps.android_keystore_file.outputs.filePath }} && echo 'Yes' || echo 'No')"
-          echo "Keystore file size: $(stat -c%s ${{ steps.android_keystore_file.outputs.filePath }} 2>/dev/null || echo 'N/A') bytes"
-          keytool -list -keystore ${{ steps.android_keystore_file.outputs.filePath }} -storepass ${{ secrets.KEYSTORE_PASSWORD }} | head -5
+          echo "Keystore file exists: $(test -f ${{ github.workspace }}/my.keystore && echo 'Yes' || echo 'No')"
+          echo "Keystore file size: $(stat -c%s ${{ github.workspace }}/my.keystore 2>/dev/null || echo 'N/A') bytes"
+          keytool -list -keystore ${{ github.workspace }}/my.keystore -storepass ${{ secrets.KEYSTORE_PASSWORD }} | head -5
 
       - name: Build Release APK
         env:
-          KEYSTORE_FILE: ${{ steps.android_keystore_file.outputs.filePath }}
+          KEYSTORE_FILE: ${{ github.workspace }}/my.keystore
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -48,7 +59,7 @@ jobs:
 
       - name: Build Release AAB
         env:
-          KEYSTORE_FILE: ${{ steps.android_keystore_file.outputs.filePath }}
+          KEYSTORE_FILE: ${{ github.workspace }}/my.keystore
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
