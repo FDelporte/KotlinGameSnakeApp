@@ -24,15 +24,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Decode Keystore
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: |
-          echo $KEYSTORE_BASE64 | base64 -d > release-keystore.jks
+      # Setup the Android keystore, based on a repo secret. See the section 'Setup Android Keystore' below.
+      - name: Setup Android Keystore
+        id: android_keystore_file
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: 'my.keystore'
+          encodedString: ${{ secrets.KEYSTORE_BASE64 }}
 
       - name: Build Release APK
         env:
-          KEYSTORE_FILE: ../release-keystore.jks
+          KEYSTORE_FILE: ${{ steps.android_keystore_file.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
@@ -40,7 +42,7 @@ jobs:
 
       - name: Build Release AAB
         env:
-          KEYSTORE_FILE: ../release-keystore.jks
+          KEYSTORE_FILE: ${{ steps.android_keystore_file.outputs.filePath }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
